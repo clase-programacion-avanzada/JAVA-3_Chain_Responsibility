@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Owner {
 	
-	private static Long nextId = 0L;
+	private static Long nextId = 1L;
 	
 	private long id;
 	private int age; 
@@ -61,7 +61,8 @@ public class Owner {
 
 	@Override
 	public String toString() {
-		return "Owner [age=" + age + "]";
+		return "{id: " + id + "\n"
+				+ "age: " + age + "}";
 	}
 
 

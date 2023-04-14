@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Car {
-	private static Long nextId = 0L;
+	private static Long nextId = 1L;
 
 	private Owner owner;
 	private long id;
@@ -53,6 +53,14 @@ public class Car {
 	private static Long getNextId() {
 		
 		return nextId++;
+	}
+
+
+	/**
+	 * @return the id
+	 */
+	public long getId() {
+		return id;
 	}
 
 
@@ -141,14 +149,33 @@ public class Car {
 		this.owner = selectedOwner;
 		
 	}
+	
+	
+	
 
 
 	@Override
 	public String toString() {
-		return "Car [owner=" + owner + ", id=" + id + ", color=" + color + ", year=" + year + ", airbags=" + airbags
-				+ ", motor=" + motor + ", wheels=" + wheels + "]";
+		return "Car {"
+				+ "id: " + id + "\n"
+				+ "color: " + color + "\n"
+				+ "year: " + year + "}";
 	}
-	
+
+
+	public void addAirbags(
+			String airbagsMaterial, 
+			Integer numberOfAirbags) {
+		
+		
+		for (int i = 0 ; i < numberOfAirbags ; i++) {
+			Airbag airbag = new Airbag(airbagsMaterial);
+			this.airbags.add(airbag);
+		}
+		
+		
+		
+	}
 	
 	
 	

@@ -27,12 +27,16 @@ public class Main {
                 System.out.println("3. Add a new car to owner");
                 System.out.println("7. exit");
                 
-                option = Integer.valueOf(scanner.nextLine());
+                String line = scanner.nextLine();
+                
+                option = Integer.valueOf(line);
 
                 switch (option) {
-                    case 1 -> addNewOwner();
-                    case 2 -> addNewCar();
-                    case 3 -> addCarToOwner();
+                	//Why we are sending the scanner to methods.
+                	//https://stackoverflow.com/questions/24848698/java-util-scanner-issue-with-closing
+                    case 1 -> addNewOwner(scanner);
+                    case 2 -> addNewCar(scanner);
+                    case 3 -> addCarToOwner(scanner);
                     case 7 -> System.out.println("Closing application");
                     default -> System.out.println("Not available");
                 }
@@ -43,7 +47,7 @@ public class Main {
 		
 	}
 
-	private static boolean addCarToOwner() {
+	private static boolean addCarToOwner(Scanner scanner) {
 		
 		if(OWNERS.isEmpty()) {
 			System.out.println("You don't have owners in your list");
@@ -55,7 +59,6 @@ public class Main {
 			return false;
 		}
 		
-		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Select the owner from the list");
 		
@@ -79,7 +82,8 @@ public class Main {
 		
 		selectedCar.setOwner(selectedOwner);
 		
-		scanner.close();
+		System.out.println("Car with id: " + selectedCar.getId() + " was added to " + 
+				" Owner with id: " + selectedOwner.getId());
 				
 		return true;
 		
@@ -115,50 +119,35 @@ public class Main {
 	}
 	*/
 
-	private static void addNewCar() {
+	private static void addNewCar(Scanner scanner) {
 		
-		Scanner scanner = new Scanner(System.in);
 		
 		System.out.println("Type car's color");
-		
 		String color = scanner.nextLine();
 		
 		System.out.println("Type car's year");
-		
 		Integer year = Integer.valueOf(scanner.nextLine());
-		
+		//Motor attributes
 		System.out.println("Let's set a motor for this car");
-		
 		System.out.println("Write motor power");
-	
 		String motorPower = scanner.nextLine();
 		
 		System.out.println("Write motor capacity");
-		
 		Integer motorCapacity = Integer.valueOf(scanner.nextLine());
 		
+		//Wheels attributes
 		System.out.println("Good, now tell me the brand of the wheels of this car");
-		
 		String wheelBrand = scanner.nextLine();
 		
 		System.out.println("Write the type of wheels this car will have");
-		
 		String wheelType = scanner.nextLine();
 		
-		/*
+		//Airbags set
 		System.out.println("Will this car have airbags? (y/n)");
-		
 		String airbagsOption = scanner.nextLine();
 		
-		boolean carHasAirbags = airbagsOption.equalsIgnoreCase("s");
-		
-		if (carHasAirbags) {
-			
-			System.out.println("Write the material for the airbags");
-			String airbagsMaterial = scanner.nextLine();		
-			
-		}
-		*/
+		boolean carHasAirbags = 
+				airbagsOption.equalsIgnoreCase("y");
 		
 		Car car = new Car(
 				color,
@@ -169,16 +158,26 @@ public class Main {
 				wheelType
 				);
 		
-		CARS.add(car);
+		if (carHasAirbags) {
+			
+			System.out.println("Write the material for the airbags");
+			String airbagsMaterial = scanner.nextLine();
+			
+			System.out.println("How many airbags do you want for this car? (1 or 2)");
+			Integer numberOfAirbags = 
+					Integer.valueOf(scanner.nextLine());
+			
+			car.addAirbags(airbagsMaterial, numberOfAirbags);
+			
+		}
 		
-		scanner.close();
+		System.out.println("Car created successfully");
 		
+		CARS.add(car);		
 		
 	}
 
-	private static void addNewOwner() {
-		
-		Scanner scanner = new Scanner(System.in);
+	private static void addNewOwner(Scanner scanner) {
 		
 		System.out.println("Type owner age");
 		
@@ -186,11 +185,9 @@ public class Main {
 		
         Owner owner = new Owner(age);
         
-        //OWNERS = new ArrayList<>();
-        
         OWNERS.add(owner);
-		
-        scanner.close();
+        
+        System.out.println("Owner succesfully added");
 	}
 	
 	
