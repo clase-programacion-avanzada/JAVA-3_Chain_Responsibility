@@ -1,0 +1,92 @@
+@startuml person-composition-aggregation
+title Person Class - Composition and Aggregation Relationships
+
+class Person {
+  - name : String
+  - age : int
+
+  + Person(name : String, age : int)
+  + walk() : void
+  + think() : void
+  + breathe() : void
+  + move() : void
+  + wearClothes(clothes : Clothes) : void
+  + removeClothes() : Clothes
+}
+
+class Heart {
+  - heartRate : int
+  - isBeating : boolean
+  
+  + Heart()
+  + beat() : void
+  + getHeartRate() : int
+}
+
+class Brain {
+  - iq : int
+  - isThinking : boolean
+  
+  + Brain()
+  + think() : void
+  + process(info : String) : String
+}
+
+class Arms {
+  - leftArm : String
+  - rightArm : String
+  - strength : int
+  
+  + Arms()
+  + lift() : void
+  + grab(object : String) : void
+}
+
+class Legs {
+  - leftLeg : String
+  - rightLeg : String
+  - speed : double
+  
+  + Legs()
+  + walk() : void
+  + run() : void
+}
+
+class Clothes {
+  - type : String
+  - size : String
+  - color : String
+  
+  + Clothes(type : String, size : String)
+  + wear() : void
+  + remove() : void
+}
+
+' Composition relationships (filled diamond)
+' Person is composed of Heart, Brain, Arms, Legs
+' If Person is destroyed, these parts are destroyed too
+Person *-- Heart : has
+Person *-- Brain : has
+Person *-- Arms : has
+Person *-- Legs : has
+
+' Aggregation relationship (hollow diamond)
+' Person has Clothes, but Clothes can exist independently
+' If Person is destroyed, Clothes can still exist
+Person o-- Clothes : wears
+
+note right of Person
+  **Composition (filled diamond *--)**
+  Person is composed of:
+  - Heart, Brain, Arms, Legs
+  These parts cannot exist
+  without the Person
+  (Strong lifecycle dependency)
+  
+  **Aggregation (hollow diamond o--)**
+  Person wears Clothes
+  Clothes can exist independently
+  (Weak lifecycle dependency)
+end note
+
+@enduml

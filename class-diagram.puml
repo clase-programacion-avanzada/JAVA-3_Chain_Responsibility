@@ -1,0 +1,67 @@
+@startuml
+title Basic Class Diagram - Visibility and Modifiers
+skinparam classAttributeIconSize 0
+
+class Class {
+  - privateAttribute : String
+
+  + publicAttribute : int
+
+  + attributeWithDefaultValue : int = 10
+
+  # protectedAttribute : double
+
+  ~ packageAttribute : boolean
+
+  {static} + STATIC_CONSTANT : String
+
+  {static} - staticPrivateVar : int
+
+  {static} # staticProtectedVar : double
+
+  {static} + STATIC_FINAL_CONSTANT : final int
+
+  + finalAttribute : final String
+
+  + Class()
+
+  + Class(param : String)
+
+  - privateMethod() : void
+
+  + publicMethod() : String
+
+  + publicMethod(param : int) : void
+
+  # protectedMethod() : boolean
+
+  ~ packageMethod() : void
+
+  {static} + staticMethod() : String
+
+  {static} - staticPrivateMethod() : void
+
+  + finalMethod() : final void
+
+  {abstract} + abstractMethod() : void
+}
+
+note right of Class
+  **Visibility Modifiers:**
+   - (minus) = private
+   + (plus) = public
+   # (hash) = protected
+   ~ (tilde) = package/default
+  
+  **Modifiers:**
+  {static} = static member
+  final = cannot be modified/overridden
+  {abstract} = abstract method
+  
+  **Static Final:**
+  Constants are shown with
+  {static} and final keywords
+  (e.g., STATIC_FINAL_CONSTANT)
+end note
+
+@enduml

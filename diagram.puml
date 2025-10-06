@@ -1,0 +1,41 @@
+@startuml
+left to right direction
+skinparam classAttributeIconSize 0
+
+
+class Main {
+  +void main()
+}
+
+class OrderProcessor {
+  +OrderProcessor(InventoryManager)
+  +void processNewProduct(String, double)
+}
+
+class InventoryManager {
+  +InventoryManager()
+  +void addProduct(String, double)
+  +List<Product> getProducts()
+}
+
+class Product {
+  -id: UUID
+  -name: String
+  -price: double
+  +Product(String, double)
+  +UUID getId()
+  +String getName()
+  +double getPrice()
+}
+
+
+
+Main .> OrderProcessor : Use
+Main .> InventoryManager : Use
+OrderProcessor "1" *---> "1" InventoryManager : Composed by (inventoryManager)
+InventoryManager "1" o---> "0..*" Product : Manages (products)
+
+
+remove Main
+
+@enduml

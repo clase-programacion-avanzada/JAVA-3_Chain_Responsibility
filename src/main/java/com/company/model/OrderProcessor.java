@@ -5,8 +5,8 @@ public class OrderProcessor {
 
     private final InventoryManager inventory;
 
-    public OrderProcessor(InventoryManager inventory) {
-        this.inventory = inventory;
+    public OrderProcessor() {
+        this.inventory = new InventoryManager();
     }
 
     public void processNewProduct(String name, double price) {

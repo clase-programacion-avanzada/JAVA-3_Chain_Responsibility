@@ -1,0 +1,25 @@
+plugins {
+	id 'java'
+}
+
+group = 'com.company'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for SoC'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(25)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+}
+
+tasks.named('test') {
+
+}
